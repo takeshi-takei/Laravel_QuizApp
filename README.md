@@ -84,6 +84,6 @@ Laravelの基本的な使い方を学んだ（Modelの扱い、CRUDの実装、�
 
 -   **管理画面:** `http://localhost/login`
     -   メールアドレス： `test@example.com`
-    -   パスワード： `password123`
+    -   パスワード： `password`
 
 -   **プレイヤー画面:** `http://localhost`
