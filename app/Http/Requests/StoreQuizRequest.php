@@ -24,14 +24,10 @@ class StoreQuizRequest extends FormRequest
         return [
             'question' => ['required', 'string', 'max:255'],
             'explanation' => ['required', 'string', 'max:1000'],
-            'options.1.content' => ['required', 'string', 'max:255'],
-            'options.2.content' => ['required', 'string', 'max:255'],
-            'options.3.content' => ['required', 'string', 'max:255'],
-            'options.4.content' => ['required', 'string', 'max:255'],
-            'options.1.is_correct' => ['required', 'in:0,1'],
-            'options.2.is_correct' => ['required', 'in:0,1'],
-            'options.3.is_correct' => ['required', 'in:0,1'],
-            'options.4.is_correct' => ['required', 'in:0,1'],
+
+            'options' => ['required', 'array', 'size:4'],
+            'options.*.content' => ['required', 'string', 'max:255'],
+            'options.*.is_correct' => ['required', 'in:0,1'],
         ];
 }
 }

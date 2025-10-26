@@ -22,6 +22,9 @@ class PlayController extends Controller
     /**クイズスタート画面表示 */
     public function categories(Request $request, int $categoryId)
     {
+
+        //セッション削除
+        session()->forget('resultArray');
         $category = Category::withCount('quizzes')->findOrFail(($categoryId));
 
         return view('play.start', [
@@ -67,7 +70,7 @@ class PlayController extends Controller
 
         if($pendingQuiz === null) {
             // すべてのクイズに回答済みの場合、結果画面へリダイレクト
-            return redirect()->route('play.top')->with('message', 'すべてのクイズに回答しました。');
+            return redirect()->route('categories.quizzes.result', ['categoryId' => $categoryId])->with('message', 'すべてのクイズに回答しました。');
         }
 
         // クイズIDを取得
@@ -76,7 +79,7 @@ class PlayController extends Controller
         return view('play.quizzes', [
             'categoryId' => $categoryId,
             'quiz' => $quiz,
-            'caetgoruId' => $categoryId,
+            'caetgoryId' => $categoryId,
         ]);
     }
     /**クイズ回答処理 */
@@ -88,7 +91,7 @@ class PlayController extends Controller
         $quiz = $category->quizzes->firstWhere('id', $quizId);
         $quizOptions = $quiz->options->toArray();
         $isCorrectAnswer = $this->isCorrectAnswer($selectedOptions, $quizOptions);
-
+        //セッションからクイズIDと回答情報を保存
         $resultArray = session('resultArray');
         //回答結果をセッションのresultArrayに保存
         foreach ($resultArray as $index => $result) {
@@ -97,6 +100,9 @@ class PlayController extends Controller
                 break;
             }
         }
+        //回答結果をセッションに保存（上書き）
+        session(['resultArray' => $resultArray]);
+
         return view('play.answer', [
             'quiz' => $quiz->toArray(),
             'quizOptions' => $quizOptions,
@@ -105,6 +111,22 @@ class PlayController extends Controller
             'isCorrectAnswer' => $isCorrectAnswer,
         ]);
     }
+
+    //**リザルト画面表示
+    public function result(Request $request, int $categoryId){
+        $resultArray = session('resultArray');
+        $questionCount = count($resultArray);
+        $correctCount = collect($resultArray)->filter(function ($result) {
+            return $result['result'] === true;
+        })->count();
+
+        return view('play.result', [
+            'categoryId' => $categoryId,
+            'questionCount' => $questionCount,
+            'correctCount' => $correctCount,
+        ]);
+    }
+    // */
 
     /**プレイヤーの回答の正誤判定 */
     private function isCorrectAnswer(array $selectedOptions, array $quizOptions)

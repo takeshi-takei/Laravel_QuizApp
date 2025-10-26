@@ -6,7 +6,20 @@
     <div class="lg:w-1/2 md:w-2/3 mx-auto">
       {{-- <div class="flex flex-wrap -m-2"> --}}
         <form method="POST" action='{{ route("admin.categories.quizzes.update", ['categoryId' => $category->id, 'quizId' => $quiz->id]) }}' class="bg-white p-8 rounded-lg flex flex-wrap -m-2">
-
+{{-- ↓↓↓ このブロックを追加 ↓↓↓ --}}
+            @if ($errors->any())
+                <div class="p-2 w-full">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">入力内容にエラーがあります。</strong>
+                        <ul class="mt-3 list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+            {{-- ↑↑↑ ここまで ↑↑↑ --}}
 
             {{-- CSRFトークンを含める --}}
             @csrf

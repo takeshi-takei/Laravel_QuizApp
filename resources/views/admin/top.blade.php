@@ -40,6 +40,8 @@
                         <form action="{{route('admin.categories.destroy', ['categoryId' => $category->id])}}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
                         {{-- CSRFトークンを含める --}}
                         @csrf
+                        @method('DELETE')
+
                         <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                             削除
                         </button>

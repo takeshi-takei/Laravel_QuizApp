@@ -24,18 +24,11 @@ class UpdateQuizRequest extends FormRequest
         return [
             'question' => ['required', 'string', 'max:255'],
             'explanation' => ['required', 'string', 'max:1000'],
-            'options.1.content' => ['required', 'string', 'max:255'],
-            'options.2.content' => ['required', 'string', 'max:255'],
-            'options.3.content' => ['required', 'string', 'max:255'],
-            'options.4.content' => ['required', 'string', 'max:255'],
-            'options.1.is_correct' => ['required', 'in:0,1'],
-            'options.2.is_correct' => ['required', 'in:0,1'],
-            'options.3.is_correct' => ['required', 'in:0,1'],
-            'options.4.is_correct' => ['required', 'in:0,1'],
-            'optionId1' => ['required', 'integer', 'exists:options,id'],
-            'optionId2' => ['required', 'integer', 'exists:options,id'],
-            'optionId3' => ['required', 'integer', 'exists:options,id'],
-            'optionId4' => ['required', 'integer', 'exists:options,id'],
+
+            'options' => ['required', 'array', 'size:4'],
+            'options.*.content' => ['required', 'string', 'max:255'],
+            'options.*.is_correct' => ['required', 'in:0,1'],
+            'options.*.optionId' => ['required', 'integer', 'exists:options,id'],
         ];
     }
 }
