@@ -1,4 +1,4 @@
-# Laravel Quiz App: ポートフォリオプロジェクト
+# Laravel Quiz App
 
 ## 🚀 アプリケーション概要
 
