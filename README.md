@@ -1,89 +1,23 @@
-##学んだこと
+# Laravel Quiz App: ポートフォリオプロジェクト
 
+## 🚀 アプリケーション概要
 
-Laravelの基本的な使い方を学んだ（Modelの扱い、CRUDの実装、ログイン機能など）
-現在、ブラウザ公開できるよう準備中
+ユーザーがクイズに回答し、管理者がカテゴリやクイズを登録・管理できるWebアプリケーションです。
 
+## 🌐 サイトURL
 
-以下、講座から引用
+| 画面 | URL | 認証情報（管理画面のみ）|
+| :--- | :--- | :--- |
+| **プレイ画面** (クイズ回答) | [http://quiz.takecom.blog/](http://quiz.takecom.blog/) | - |
+| **管理画面** (ログイン必須) | [http://quiz.takecom.blog/admin/top](http://quiz.takecom.blog/admin/top) | **Email**: test@example.com / **Password**: password |
 
-## 環境
+---
 
--   PHP v8.4.7
--   Laravel v11
--   Laravel Sail
--   Laravel Breeze
--   Docker
+## 💻 技術スタック (Technical Stack)
 
-## インストール方法
-
-### 前提条件
-
-以下のソフトウェアがインストールされている必要があります。
-
--   Git
--   Docker
--   PHP 8.2以上
--   Composer
--   Node.js
-
-### 手順
-
-1.  **Gitクローン**（お好きなフォルダで）
-    ```bash
-    git clone [リポジトリのURL]
-    cd quiz-app
-    ```
-
-2.  **Composerインストール**
-    ```bash
-    composer install
-    ```
-
-3.  **.envファイルの生成**
-    `.env.example` ファイルをコピーして `.env` ファイルを生成します。
-    ```bash
-    cp .env.example .env
-    ```
-
-4.  **APP_KEYの生成**
-    `.env` ファイル内の `APP_KEY` を設定します。
-    ```bash
-    php artisan key:generate
-    ```
-
-5.  **Dockerコンテナの起動**
-    （初回起動時は時間がかかる場合があります）
-    ```bash
-    ./vendor/bin/sail up -d
-    ```
-
-6.  **npmインストール**
-    ```bash
-    ./vendor/bin/sail npm ci
-    ```
-
-7.  **Viteの起動**
-    （ターミナルで別タブを開いて実行するのがおすすめです）
-    ```bash
-    ./vendor/bin/sail npm run dev
-    ```
-
-8.  **マイグレーションの実行**
-    ```bash
-    ./vendor/bin/sail artisan migrate
-    ```
-
-9.  **シーディングの実行**
-    （管理者データを作成します）
-    ```bash
-    ./vendor/bin/sail artisan db:seed
-    ```
-
-## アクセス情報
-
--   **管理画面:** `http://localhost/login`
-    -   メールアドレス： `test@example.com`
-    -   パスワード： `password`
-
--   **プレイヤー画面:** `http://localhost`
+| カテゴリ | 技術 |
+| :--- | :--- |
+| バックエンド | **PHP 8.x**, **Laravel 10** |
+| データベース | **MySQL 8.0** |
+| フロントエンド | **Vite**, **Tailwind CSS** (CSSフレームワーク) |
+| インフラ/環境 | **AWS EC2 (Ubuntu)**, **Docker / Docker Compose (Laravel Sail)**, **NGINX** |
